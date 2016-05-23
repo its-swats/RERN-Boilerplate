@@ -73,9 +73,9 @@
 			socket.emit('like');
 		},
 		componentDidMount: function componentDidMount() {
-			socket.on('incrementLikes', this._incrementLikes);
+			socket.on('setLikes', this._setLikes);
 		},
-		_incrementLikes: function _incrementLikes(newLikeCount) {
+		_setLikes: function _setLikes(newLikeCount) {
 			this.setState({ likesCount: newLikeCount });
 		},
 		render: function render() {

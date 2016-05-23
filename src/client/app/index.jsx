@@ -11,9 +11,9 @@ var App = React.createClass({
 		socket.emit('like');
 	},
 	componentDidMount: function() {
-		socket.on('incrementLikes', this._incrementLikes);
+		socket.on('setLikes', this._setLikes);
 	},
-	_incrementLikes: function(newLikeCount){
+	_setLikes: function(newLikeCount){
 		this.setState({likesCount: newLikeCount});
 	},
   render: function() {
