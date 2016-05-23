@@ -12,6 +12,14 @@ var App = React.createClass({
 	},
 	componentDidMount: function() {
 		socket.on('setLikes', this._setLikes);
+
+		this.serverRequest = $.ajax({
+			url: '/likes',
+			method: 'GET'
+		}).done(function(data){
+			console.log(data)
+			this.setState({likesCount: data.likes})
+		}.bind(this));
 	},
 	_setLikes: function(newLikeCount){
 		this.setState({likesCount: newLikeCount});

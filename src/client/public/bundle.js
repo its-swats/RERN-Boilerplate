@@ -74,6 +74,14 @@
 		},
 		componentDidMount: function componentDidMount() {
 			socket.on('setLikes', this._setLikes);
+	
+			this.serverRequest = $.ajax({
+				url: '/likes',
+				method: 'GET'
+			}).done(function (data) {
+				console.log(data);
+				this.setState({ likesCount: data.likes });
+			}.bind(this));
 		},
 		_setLikes: function _setLikes(newLikeCount) {
 			this.setState({ likesCount: newLikeCount });

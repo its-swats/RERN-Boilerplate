@@ -30,6 +30,13 @@ io.on('connection', function(socket){
 	})
 })
 
+app.get('/likes', function(req, res){
+	r.table('likes').get(1).run(connection, function(err, result){
+		if (err) throw err;
+		res.json({likes: result.likeCount})
+	})
+})
+
 app.get('/', function(req, res){
 	res.sendFile(__dirname, 'index.html')
 })
