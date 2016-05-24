@@ -15,6 +15,10 @@ r.table('likes').get(1).run().then(function(result){
 	if (result == null) {
 		r.table('likes').insert({id: 1, likeCount: 0}).run()
 	}
+}).error(function(err){
+	r.tableCreate('likes').run().then(function(result){
+		r.table('likes').insert({id: 1, likeCount: 0}).run()
+	})
 })
 
 r.table('likes').changes().run().then(function(result){
