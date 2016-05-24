@@ -12,7 +12,6 @@ var App = React.createClass({
 	},
 	componentDidMount: function() {
 		socket.on('setLikes', this._setLikes);
-
 		this.serverRequest = $.ajax({
 			url: '/likes',
 			method: 'GET'

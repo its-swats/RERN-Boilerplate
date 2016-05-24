@@ -20,7 +20,7 @@ There's a lot of work left to do here, but this should be enough to get a projec
 
 * Database names and connections are currently hardcoded for localhost
 * ~~Database will need to create a table if one does not already exist~~
-* On initial server launch, the table and entry will be created, but the server will need to be restarted before the changefeed will take effect
+* ~~On initial server launch, the table and entry will be created, but the server will need to be restarted before the changefeed will take effect~~
 * Need to implement some sort of hot-loading for changes made to the server to go with thh React hot-loading
 
 ##Contributions

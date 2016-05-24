@@ -6,28 +6,13 @@ var server = app.listen(3000, function(){
 	console.log('listening on :3000')
 })
 var io = require('socket.io').listen(server);
-
+var databaseSetup = require('./src/server/database.js')
 
 app.use(express.static('src/client'));
 
-
-r.table('likes').get(1).run().then(function(result){
-	if (result == null) {
-		r.table('likes').insert({id: 1, likeCount: 0}).run()
-	}
-}).error(function(err){
-	r.tableCreate('likes').run().then(function(result){
-		r.table('likes').insert({id: 1, likeCount: 0}).run()
-	})
+databaseSetup.prepareForLaunch(function(row){
+	io.emit('setLikes', row.new_val.likeCount);
 })
-
-r.table('likes').changes().run().then(function(result){
-	result.each(function(err, row){
-		console.log('Updating Clients...')
-		io.emit('setLikes', row.new_val.likeCount);
-	})
-})
-
 
 io.on('connection', function(socket){
 	socket.on('like', function(){
@@ -46,5 +31,4 @@ app.get('/likes', function(req, res){
 app.get('/', function(req, res){
 	res.sendFile(__dirname, 'index.html')
 })
-
 
