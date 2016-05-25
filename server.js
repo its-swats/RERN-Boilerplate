@@ -5,7 +5,7 @@ var server = app.listen(3000, function(){
 	console.log('listening on :3000');
 })
 var io = require('socket.io').listen(server);
-var attachSocket = require('./src/server/socket.js')
+var attachSocket = require('./src/server/eventEmitters.js')
 var databaseSetup = require('./src/server/database.js');
 
 app.use(express.static('src/client'));
