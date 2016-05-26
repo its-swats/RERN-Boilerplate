@@ -12,13 +12,6 @@ var App = React.createClass({
 	},
 	componentDidMount: function() {
 		socket.on('updateClient', this._updateClient);
-
-		this.serverRequest = $.ajax({
-			url: '/initialState',
-			method: 'GET'
-		}).done(function(data){
-			this.setState({likesCount: data.likes})
-		}.bind(this));
 	},
 	_updateClient: function(data){
 		this.setState({[data.action]: data.value});
