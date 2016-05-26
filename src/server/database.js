@@ -29,4 +29,4 @@ var initializeDatabase = function(callback){
 	})
 }
 
-	module.exports.prepareForLaunch = prepareForLaunch;
+module.exports.prepareForLaunch = prepareForLaunch;

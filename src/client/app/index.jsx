@@ -5,28 +5,29 @@ const socket = io.connect(window.location.host)
 
 var App = React.createClass({
 	getInitialState: function() {
-		return {likesCount: 0};
+		return {likesCount: 0, connectionCount: 0};
 	},
 	onLike: function() {
 		socket.emit('like');
 	},
 	componentDidMount: function() {
-		socket.on('setLikes', this._setLikes);
+		socket.on('updateClient', this._updateClient);
+
 		this.serverRequest = $.ajax({
-			url: '/likes',
+			url: '/initialState',
 			method: 'GET'
 		}).done(function(data){
-			console.log(data)
 			this.setState({likesCount: data.likes})
 		}.bind(this));
 	},
-	_setLikes: function(newLikeCount){
-		this.setState({likesCount: newLikeCount});
+	_updateClient: function(data){
+		this.setState({[data.action]: data.value});
 	},
   render: function() {
     return (
     <div>
     	<p>React Component 1</p>
+        <p>Active Connections: {this.state.connectionCount}</p>
     	<p>Likes : {this.state.likesCount}</p>
     	<div>
     		<button onClick={this.onLike}>Like Me</button>
